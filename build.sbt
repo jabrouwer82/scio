@@ -236,6 +236,7 @@ lazy val itSettings = Defaults.itSettings ++ Seq(
     }
   }
 ) ++
+  inConfig(IntegrationTest)(run / fork := true) ++
   inConfig(IntegrationTest)(BloopDefaults.configSettings) ++
   inConfig(IntegrationTest)(scalafmtConfigSettings) ++
   inConfig(IntegrationTest)(scalafixConfigSettings(IntegrationTest))
@@ -425,6 +426,10 @@ lazy val scioTest: Project = Project(
   .settings(macroSettings)
   .settings(
     description := "Scio helpers for ScalaTest",
+    // IntegrationTest / Compile / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat,
+    // IntegrationTest / Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat,
+    // Test / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat,
+    IntegrationTest / run / classLoaderLayeringStrategy := ClassLoaderLayeringStrategy.Flat,
     libraryDependencies ++= Seq(
       "org.apache.beam" % "beam-runners-direct-java" % beamVersion,
       "org.apache.beam" % "beam-runners-google-cloud-dataflow-java" % beamVersion % "test,it",
@@ -774,7 +779,6 @@ lazy val scioTensorFlow: Project = Project(
       "io.circe" %% "circe-generic",
       "io.circe" %% "circe-parser"
     ).map(_ % circeVersion),
-    Test / fork := true,
     javaOptions += "-Dscio.ignoreVersionWarning=true"
   )
   .dependsOn(
