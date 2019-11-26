@@ -928,7 +928,8 @@ lazy val `scio-examples`: Project = project
     `scio-spanner`,
     `scio-tensorflow`,
     `scio-sql`,
-    `scio-test` % "compile->test"
+    `scio-test` % "compile->test",
+    `scio-smb`
   )
 
 lazy val `scio-repl`: Project = project
@@ -1007,7 +1008,8 @@ lazy val `scio-smb`: Project = project
   )
   .configs(
     IntegrationTest
-  ).dependsOn(
+  )
+  .dependsOn(
     `scio-core`,
     `scio-avro`,
     `scio-test`
