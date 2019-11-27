@@ -19,7 +19,7 @@ package com.spotify.scio.coders
 
 import java.io.{InputStream, OutputStream}
 
-import com.spotify.scio.coders.instances.{Implicits, LowPriorityFallbackCoder}
+import com.spotify.scio.coders.instances.LowPriorityFallbackCoder
 import org.apache.beam.sdk.coders.Coder.NonDeterministicException
 import org.apache.beam.sdk.coders.{AtomicCoder, Coder => BCoder}
 import org.apache.beam.sdk.util.common.ElementByteSizeObserver
